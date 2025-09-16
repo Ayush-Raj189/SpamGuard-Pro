@@ -33,23 +33,25 @@ venv\Scripts\activate      # On Windows
 3.Run the app
 streamlit run app.py
 
-🔎How It Works
-1.Text Preprocessing
-   Converts message to lowercase
-   Tokenizes words
-   Removes stopwords & punctuation
-   Applies stemming
+## 🔎 How It Works  
 
-2.Feature Extraction
-   Transforms text into numerical features using TF-IDF
+**1. Text Preprocessing**  
+- Converts message to lowercase  
+- Tokenizes words  
+- Removes stopwords & punctuation  
+- Applies stemming  
 
-3.Prediction
-   ML model classifies the message as Spam (1) or Not Spam (0)
+**2. Feature Extraction**  
+- Transforms text into numerical features using **TF-IDF**  
 
-4.Output
-  Displays classification result with styled result box
-  Optionally shows the processed text for transparency
+**3. Prediction**  
+- ML model classifies the message as **Spam (1)** or **Not Spam (0)**  
 
+**4. Output**  
+- Displays classification result with styled result box  
+- Optionally shows the processed text for transparency
+
+  
 📸 Screenshots
 <img width="1748" height="1388" alt="image" src="https://github.com/user-attachments/assets/6386f27d-b902-4659-83e0-ee3cfbe1c151" />
 
