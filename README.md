@@ -35,10 +35,10 @@ streamlit run app.py
 
 🔎 How It Works
 1.Text Preprocessing
- Converts message to lowercase
- Tokenizes words
- Removes stopwords & punctuation
- Applies stemming
+  Converts message to lowercase
+  Tokenizes words
+  Removes stopwords & punctuation
+  Applies stemming
 
 2.Feature Extraction
   Transforms text into numerical features using TF-IDF
