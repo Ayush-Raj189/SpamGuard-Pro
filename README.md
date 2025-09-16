@@ -55,14 +55,13 @@ streamlit run app.py
 📸 Screenshots
 <img width="1748" height="1388" alt="image" src="https://github.com/user-attachments/assets/6386f27d-b902-4659-83e0-ee3cfbe1c151" />
 
+## 🔮 Future Improvements  
 
-🔮 Future Improvements
-
-📌 Add support for multiple languages
-📌 Deploy the app on Streamlit Cloud / Heroku / AWS
-📌 Improve accuracy with deep learning models (LSTM/BERT)
-📌 Build an API for external integration
-
+- 📌 Add support for multiple languages  
+- 📌 Deploy the app on **Streamlit Cloud / Heroku / AWS**  
+- 📌 Improve accuracy with deep learning models (**LSTM / BERT**)  
+- 📌 Build an API for external integration
+  
 🤝 Contributing
 
 Contributions are welcome!
