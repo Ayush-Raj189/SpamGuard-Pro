@@ -230,7 +230,7 @@ if predict_clicked:
 st.markdown("""
 <div class="footer">
     Made with <span class="heart">&#10084;&#65039;</span> by Ayush &nbsp;|&nbsp; Contact: 9835237626 &nbsp;|&nbsp; 
-    <a href="mailto:ayushashush1111@gmail.com">Email: ayushashush1111@gmail.com</a>
+    <a href="mailto:ayushashush1111@gmail.com">Email: ayushashish1111@gmail.com</a>
 </div>
 """, unsafe_allow_html=True)
 
