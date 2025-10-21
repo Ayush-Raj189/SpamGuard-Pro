@@ -5,20 +5,12 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt')
-
-try:
-    nltk.data.find('tokenizers/punkt_tab')
-except LookupError:
-    nltk.download('punkt_tab')  # Add this line to download punkt_tab
-
-try:
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    nltk.download('stopwords')
+# Download necessary NLTK data resources
+for resource in ['punkt', 'punkt_tab', 'stopwords']:
+    try:
+        nltk.data.find(f'tokenizers/{resource}' if resource != 'stopwords' else f'corpora/{resource}')
+    except LookupError:
+        nltk.download(resource)
 
 
 ps = PorterStemmer()
@@ -55,103 +47,132 @@ except FileNotFoundError:
     st.error("Model files not found. Please make sure 'vectorizer.pkl' and 'model.pkl' are in the same directory.")
     st.stop()
 
-# Responsive CSS for all devices
+# Responsive CSS + animation
 st.markdown("""
 <style>
-    /* Base responsive styles */
+    /* Base styles */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f8f9fa;
+        margin: 0; padding: 0;
+    }
     .main-header {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
         color: #FF4B4B;
         text-align: center;
         margin-bottom: 1.5rem;
+        font-weight: 800;
+        animation: pulse 3s infinite;
     }
-    
+    @keyframes pulse {
+        0%, 100% {text-shadow: 0 0 10px #FF4B4B;}
+        50% {text-shadow: 0 0 20px #FF2B2B;}
+    }
     .stButton>button {
         background-color: #FF4B4B;
         color: white;
         border: none;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
-        font-size: 1.1rem;
+        padding: 0.85rem 1.8rem;
+        border-radius: 0.6rem;
+        font-size: 1.2rem;
         cursor: pointer;
         width: 100%;
-        transition: all 0.3s ease;
+        transition: all 0.35s ease;
+        font-weight: 600;
+        box-shadow: 0 4px 6px rgba(255,75,75,0.5);
     }
-    
     .stButton>button:hover {
         background-color: #FF2B2B;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 12px rgba(255,43,43,0.7);
     }
-    
     .result-box {
-        padding: 1.25rem;
-        border-radius: 0.5rem;
-        margin-top: 1.5rem;
+        padding: 1.5rem;
+        border-radius: 0.6rem;
+        margin-top: 1.8rem;
         text-align: center;
         font-weight: bold;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
+        user-select: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    
     .spam-result {
         background-color: #FFE6E6;
         color: #FF4B4B;
         border: 2px solid #FF4B4B;
     }
-    
     .ham-result {
         background-color: #E6FFE6;
         color: #4CAF50;
         border: 2px solid #4CAF50;
     }
-    
     .info-box {
         background-color: #E6F3FF;
-        padding: 1rem;
-        border-radius: 0.5rem;
+        padding: 1rem 1.2rem;
+        border-radius: 0.6rem;
         border-left: 5px solid #1E88E5;
-        margin-bottom: 1.5rem;
-        font-size: 0.95rem;
+        margin-bottom: 1.8rem;
+        font-size: 1rem;
+        box-shadow: 0 2px 4px rgba(30,136,229,0.1);
     }
-    
     /* Mobile responsiveness */
     @media (max-width: 768px) {
         .main-header {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 1rem;
         }
-        
         .stButton>button {
-            padding: 0.6rem 1.2rem;
-            font-size: 1rem;
-        }
-        
-        .result-box {
-            padding: 1rem;
+            padding: 0.7rem 1.2rem;
             font-size: 1.1rem;
         }
-        
+        .result-box {
+            padding: 1.2rem;
+            font-size: 1.15rem;
+        }
         .stTextArea textarea {
-            min-height: 120px;
+            min-height: 140px;
         }
     }
-    
     /* Tablet responsiveness */
     @media (max-width: 1024px) and (min-width: 769px) {
         .main-header {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
         }
     }
-    
-    /* Ensure proper text scaling */
     html {
         font-size: 16px;
     }
-    
-    /* Make expanders more touch-friendly on mobile */
     .streamlit-expanderHeader {
-        font-size: 1.1rem;
-        padding: 0.75rem;
+        font-size: 1.15rem !important;
+        padding: 0.9rem !important;
+    }
+    /* Footer styling */
+    .footer {
+        margin-top: 3rem;
+        padding: 1rem 0;
+        border-top: 1px solid #ddd;
+        font-size: 0.95rem;
+        text-align: center;
+        color: #555;
+    }
+    .footer a {
+        color: #FF4B4B;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .footer a:hover {
+        text-decoration: underline;
+    }
+    /* Heart beat animation */
+    .heart {
+        color: #FF4B4B;
+        animation: heartbeat 1.5s ease-in-out infinite;
+        display: inline-block;
+        margin-left: 0.3rem;
+    }
+    @keyframes heartbeat {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.3); }
     }
 </style>
 """, unsafe_allow_html=True)
@@ -170,10 +191,10 @@ with st.expander("ℹ️ About this app", expanded=False):
 
 # Input section
 st.subheader("🔍 Enter your message")
-input_sms = st.text_area("", 
-                         placeholder="Type or paste your SMS message here...", 
-                         height=150,
-                         label_visibility="collapsed")
+input_sms = st.text_area("",
+                        placeholder="Type or paste your SMS message here...", 
+                        height=150,
+                        label_visibility="collapsed")
 
 # Prediction button and logic
 col1, col2, col3 = st.columns([1, 2, 1])
@@ -206,20 +227,17 @@ if predict_clicked:
             st.code(transformed_sms)
 
 # Footer
-st.markdown("---")
-st.markdown("### How it works:")
 st.markdown("""
-1. Your message is preprocessed (lowercase, tokenized, cleaned)
-2. Stopwords and punctuation are removed
-3. Words are stemmed to their root form
-4. Processed text is converted to numerical features using TF-IDF
-5. A trained machine learning model makes the prediction
-""")
+<div class="footer">
+    Made with <span class="heart">&#10084;&#65039;</span> by Ayush &nbsp;|&nbsp; Contact: 9835237626 &nbsp;|&nbsp; 
+    <a href="mailto:ayushashush1111@gmail.com">Email: ayushashush1111@gmail.com</a>
+</div>
+""", unsafe_allow_html=True)
 
-# Mobile-specific optimizations
+# Mobile-specific optimizations for font scaling
 st.markdown("""
 <script>
-    // Make the page mobile-friendly
+    // Make the page mobile-friendly with smaller font size
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         document.querySelector('html').style.fontSize = '14px';
     }
